@@ -19,233 +19,233 @@ build_property.TargetFrameworkIdentifier = .NETCoreApp
 build_property.TargetFrameworkVersion = v10.0
 build_property.RootNamespace = HRM
 build_property.RootNamespace = HRM
-build_property.ProjectDir = D:\HACKATHON\HRM\
+build_property.ProjectDir = d:\HACKATHON\HRM\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\HACKATHON\HRM
+build_property.MSBuildProjectDirectory = d:\HACKATHON\HRM
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[D:/HACKATHON/HRM/Views/Account/AccessDenied.cshtml]
+[d:/HACKATHON/HRM/Views/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Account/Login.cshtml]
+[d:/HACKATHON/HRM/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Account/Register.cshtml]
+[d:/HACKATHON/HRM/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Asset/Assign.cshtml]
+[d:/HACKATHON/HRM/Views/Asset/Assign.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzZXRcQXNzaWduLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Asset/Create.cshtml]
+[d:/HACKATHON/HRM/Views/Asset/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzZXRcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Asset/Index.cshtml]
+[d:/HACKATHON/HRM/Views/Asset/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzZXRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Attendance/FaceCheckIn.cshtml]
+[d:/HACKATHON/HRM/Views/Attendance/FaceCheckIn.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXR0ZW5kYW5jZVxGYWNlQ2hlY2tJbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Attendance/History.cshtml]
+[d:/HACKATHON/HRM/Views/Attendance/History.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXR0ZW5kYW5jZVxIaXN0b3J5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Attendance/Index.cshtml]
+[d:/HACKATHON/HRM/Views/Attendance/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXR0ZW5kYW5jZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Attendance/RegisterFace.cshtml]
+[d:/HACKATHON/HRM/Views/Attendance/RegisterFace.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXR0ZW5kYW5jZVxSZWdpc3RlckZhY2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Contract/Create.cshtml]
+[d:/HACKATHON/HRM/Views/Contract/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhY3RcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Contract/Details.cshtml]
+[d:/HACKATHON/HRM/Views/Contract/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhY3RcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Contract/Index.cshtml]
+[d:/HACKATHON/HRM/Views/Contract/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhY3RcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Department/Create.cshtml]
+[d:/HACKATHON/HRM/Views/Department/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Department/Details.cshtml]
+[d:/HACKATHON/HRM/Views/Department/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Department/Edit.cshtml]
+[d:/HACKATHON/HRM/Views/Department/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Department/Index.cshtml]
+[d:/HACKATHON/HRM/Views/Department/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Department/OrgChart.cshtml]
+[d:/HACKATHON/HRM/Views/Department/OrgChart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxPcmdDaGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Department/_DepartmentNode.cshtml]
+[d:/HACKATHON/HRM/Views/Department/_DepartmentNode.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxfRGVwYXJ0bWVudE5vZGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Employee/Create.cshtml]
+[d:/HACKATHON/HRM/Views/Employee/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Employee/Delete.cshtml]
+[d:/HACKATHON/HRM/Views/Employee/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Employee/Details.cshtml]
+[d:/HACKATHON/HRM/Views/Employee/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Employee/Edit.cshtml]
+[d:/HACKATHON/HRM/Views/Employee/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Employee/Index.cshtml]
+[d:/HACKATHON/HRM/Views/Employee/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Home/Index.cshtml]
+[d:/HACKATHON/HRM/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Home/Privacy.cshtml]
+[d:/HACKATHON/HRM/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Learning/CourseDetails.cshtml]
+[d:/HACKATHON/HRM/Views/Learning/CourseDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhcm5pbmdcQ291cnNlRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Learning/CreateCourse.cshtml]
+[d:/HACKATHON/HRM/Views/Learning/CreateCourse.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhcm5pbmdcQ3JlYXRlQ291cnNlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Learning/Index.cshtml]
+[d:/HACKATHON/HRM/Views/Learning/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhcm5pbmdcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Learning/Learn.cshtml]
+[d:/HACKATHON/HRM/Views/Learning/Learn.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhcm5pbmdcTGVhcm4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/LeaveRequest/Create.cshtml]
+[d:/HACKATHON/HRM/Views/LeaveRequest/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhdmVSZXF1ZXN0XENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/LeaveRequest/Index.cshtml]
+[d:/HACKATHON/HRM/Views/LeaveRequest/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhdmVSZXF1ZXN0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/LeaveRequest/Manage.cshtml]
+[d:/HACKATHON/HRM/Views/LeaveRequest/Manage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhdmVSZXF1ZXN0XE1hbmFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Newsfeed/Index.cshtml]
+[d:/HACKATHON/HRM/Views/Newsfeed/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c2ZlZWRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Onboarding/EmployeeProgress.cshtml]
+[d:/HACKATHON/HRM/Views/Onboarding/EmployeeProgress.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT25ib2FyZGluZ1xFbXBsb3llZVByb2dyZXNzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Onboarding/ManageTasks.cshtml]
+[d:/HACKATHON/HRM/Views/Onboarding/ManageTasks.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT25ib2FyZGluZ1xNYW5hZ2VUYXNrcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Onboarding/MyOnboarding.cshtml]
+[d:/HACKATHON/HRM/Views/Onboarding/MyOnboarding.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT25ib2FyZGluZ1xNeU9uYm9hcmRpbmcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Payroll/CreateFormula.cshtml]
+[d:/HACKATHON/HRM/Views/Payroll/CreateFormula.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5cm9sbFxDcmVhdGVGb3JtdWxhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Payroll/CreatePeriod.cshtml]
+[d:/HACKATHON/HRM/Views/Payroll/CreatePeriod.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5cm9sbFxDcmVhdGVQZXJpb2QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Payroll/Details.cshtml]
+[d:/HACKATHON/HRM/Views/Payroll/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5cm9sbFxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Payroll/Formulas.cshtml]
+[d:/HACKATHON/HRM/Views/Payroll/Formulas.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5cm9sbFxGb3JtdWxhcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Payroll/Index.cshtml]
+[d:/HACKATHON/HRM/Views/Payroll/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5cm9sbFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Recruitment/ApplySuccess.cshtml]
+[d:/HACKATHON/HRM/Views/Recruitment/ApplySuccess.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdG1lbnRcQXBwbHlTdWNjZXNzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Recruitment/CreateJob.cshtml]
+[d:/HACKATHON/HRM/Views/Recruitment/CreateJob.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdG1lbnRcQ3JlYXRlSm9iLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Recruitment/Details.cshtml]
+[d:/HACKATHON/HRM/Views/Recruitment/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdG1lbnRcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Recruitment/Index.cshtml]
+[d:/HACKATHON/HRM/Views/Recruitment/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdG1lbnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Recruitment/Kanban.cshtml]
+[d:/HACKATHON/HRM/Views/Recruitment/Kanban.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdG1lbnRcS2FuYmFuLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Recruitment/Manage.cshtml]
+[d:/HACKATHON/HRM/Views/Recruitment/Manage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdG1lbnRcTWFuYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Recruitment/_ApplicationCard.cshtml]
+[d:/HACKATHON/HRM/Views/Recruitment/_ApplicationCard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdG1lbnRcX0FwcGxpY2F0aW9uQ2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Shared/Error.cshtml]
+[d:/HACKATHON/HRM/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Shared/_LoginPartial.cshtml]
+[d:/HACKATHON/HRM/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Shared/_ValidationScriptsPartial.cshtml]
+[d:/HACKATHON/HRM/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/_ViewImports.cshtml]
+[d:/HACKATHON/HRM/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/_ViewStart.cshtml]
+[d:/HACKATHON/HRM/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/HACKATHON/HRM/Views/Shared/_Layout.cshtml]
+[d:/HACKATHON/HRM/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-yg6ks92n90
