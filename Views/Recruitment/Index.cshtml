@@ -1,0 +1,52 @@
+@model IEnumerable<HRM.ViewModels.Recruitment.JobPostingVM>
+
+@{
+      ViewData["Title"] = "Cơ hội nghề nghiệp";
+}
+
+<div class="text-center mb-5">
+      <h1 class="display-4 text-primary">Tham gia đội ngũ của chúng tôi</h1>
+      <p class="lead">Tìm kiếm cơ hội phát triển sự nghiệp tại Digital HRM</p>
+</div>
+
+<div class="container">
+      <div class="row">
+            @if (Model != null && Model.Any())
+            {
+                  foreach (var job in Model)
+                  {
+                        <div class="col-md-6 mb-4">
+                              <div class="card h-100 shadow-sm hover-shadow transition">
+                                    <div class="card-body">
+                                          <div class="d-flex justify-content-between align-items-start mb-2">
+                                                <h5 class="card-title text-primary">@job.Title</h5>
+                                                <span class="badge bg-light text-dark border">@job.Location</span>
+                                          </div>
+                                          <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-building"></i>
+                                                @job.DepartmentName</h6>
+                                                <p class="card-text text-truncate-3">@Html.Raw(job.Description?.Substring(0,
+                                                                                          Math.Min(job.Description?.Length ?? 0, 150)))...</p>
+
+                                                      <div class="d-flex justify-content-between align-items-center mt-3">
+                                                            <small class="text-muted"><i class="bi bi-cash"></i> @job.MinSalary.ToString("N0") -
+                                                                  @job.MaxSalary.ToString("N0") VNĐ</small>
+                                                                  <small class="text-danger"><i class="bi bi-clock"></i> Hạn:
+                                                                        @job.Deadline.ToString("dd/MM/yyyy")</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="card-footer bg-white border-top-0 d-flex justify-content-end pb-3">
+                                                                  <a asp-action="Details" asp-route-id="@job.Id"
+                                                                     class="btn btn-outline-primary stretched-link">Xem chi tiết & Ứng tuyển</a>
+                                                            </div>
+                                                      </div>
+                                                </div>
+                                          }
+                                    }
+        else
+                                    {
+                                          <div class="col-12 text-center py-5">
+                                                <p class="text-muted">Hiện tại chưa có vị trí nào đang tuyển dụng. Vui lòng quay lại sau.</p>
+                                          </div>
+                                    }
+                              </div>
+                        </div>

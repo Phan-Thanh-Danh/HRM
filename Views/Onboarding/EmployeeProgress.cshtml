@@ -1,0 +1,83 @@
+@model HRM.ViewModels.HR.EmployeeOnboardingVM
+
+@{
+    ViewData["Title"] = "Tiến độ Onboarding: " + Model.EmployeeName;
+}
+
+<div class="container py-4">
+    <div class="d-flex align-items-center mb-4">
+        <img src="https://ui-avatars.com/api/?name=@Model.EmployeeName&background=random" class="rounded-circle me-3" width="64" height="64" />
+        <div>
+            <h2 class="mb-0">@Model.EmployeeName</h2>
+            <p class="text-muted mb-0">Mã NV: @Model.EmployeeId</p>
+        </div>
+    </div>
+
+    <!-- Progress Card -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Tổng quan tiến độ</h5>
+            <div class="progress" style="height: 25px;">
+                <div class="progress-bar progress-bar-striped progress-bar-animated @(Model.ProgressPercentage == 100 ? "bg-success" : "bg-primary")" 
+                     role="progressbar" 
+                     style="width: @Model.ProgressPercentage%" 
+                     aria-valuenow="@Model.ProgressPercentage" 
+                     aria-valuemin="0" 
+                     aria-valuemax="100">
+                    @Model.ProgressPercentage%
+                </div>
+            </div>
+            <div class="mt-2 text-muted">
+                Đã hoàn thành @Model.CompletedCount trên tổng số @Model.TotalCount nhiệm vụ.
+            </div>
+        </div>
+    </div>
+
+    <!-- Tasks List -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h5 class="mb-0">Danh sách nhiệm vụ</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            @foreach (var task in Model.Tasks)
+            {
+                <div class="list-group-item d-flex justify-content-between align-items-center p-3 @(task.IsCompleted ? "bg-light" : "")">
+                    <div class="d-flex align-items-start">
+                        <div class="me-3 mt-1">
+                            @if (task.IsCompleted)
+                            {
+                                <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-circle text-muted fs-4"></i>
+                            }
+                        </div>
+                        <div>
+                            <h6 class="mb-1 fw-bold @(task.IsCompleted ? "text-decoration-line-through text-muted" : "")">
+                                @task.Title
+                                @if(task.IsRequired) { <span class="badge bg-danger rounded-pill ms-2" style="font-size: 0.6em">Bắt buộc</span> }
+                            </h6>
+                            <p class="mb-1 text-muted small">@task.Description</p>
+                            @if (task.IsCompleted && task.CompletedDate.HasValue)
+                            {
+                                <small class="text-success"><i class="bi bi-clock"></i> Hoàn thành lúc: @task.CompletedDate.Value.ToString("dd/MM/yyyy HH:mm")</small>
+                            }
+                        </div>
+                    </div>
+                    
+                    @if (!task.IsCompleted)
+                    {
+                        <form asp-action="CompleteTask" method="post">
+                            <input type="hidden" name="employeeId" value="@Model.EmployeeId" />
+                            <input type="hidden" name="taskId" value="@task.TaskId" />
+                            <button type="submit" class="btn btn-outline-primary btn-sm">
+                                Xác nhận hoàn thành
+                            </button>
+                        </form>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

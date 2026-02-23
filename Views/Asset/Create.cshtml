@@ -1,0 +1,65 @@
+@model HRM.ViewModels.Admin.AssetVM
+
+@{
+    ViewData["Title"] = "Thêm tài sản mới";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">@ViewData["Title"]</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Name" class="form-label">Tên tài sản</label>
+                                <input asp-for="Name" class="form-control" placeholder="Laptop Dell XPS 15..." />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Code" class="form-label">Mã tài sản</label>
+                                <input asp-for="Code" class="form-control" placeholder="ASSET-001" />
+                                <span asp-validation-for="Code" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="PurchaseDate" class="form-label">Ngày mua</label>
+                                <input asp-for="PurchaseDate" class="form-control" type="date" />
+                                <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PurchasePrice" class="form-label">Giá trị (VNĐ)</label>
+                                <input asp-for="PurchasePrice" class="form-control" type="number" />
+                                <span asp-validation-for="PurchasePrice" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Mô tả chi tiết</label>
+                            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Status" class="form-label">Trạng thái ban đầu</label>
+                            <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<HRM.Models.AssetStatus>()"></select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a asp-action="Index" class="btn btn-secondary">Hủy bỏ</a>
+                            <button type="submit" class="btn btn-primary">Lưu tài sản</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

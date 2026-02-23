@@ -1,0 +1,92 @@
+@model HRM.ViewModels.Time.AttendanceCheckInVM
+
+@{
+      ViewData["Title"] = "Chấm công";
+      bool hasCheckedIn = ViewBag.HasCheckedIn ?? false;
+}
+
+<div class="row justify-content-center mt-5">
+      <div class="col-md-6 text-center">
+            <h1 class="mb-4"><i class="bi bi-clock-history text-primary"></i> Chấm công Hàng ngày</h1>
+
+            <div class="card shadow-lg border-0">
+                  <div class="card-body p-5">
+                        <h3 class="mb-3">@DateTime.Now.ToString("dd/MM/yyyy")</h3>
+                        <h1 class="display-1 fw-bold" id="liveClock">@DateTime.Now.ToString("HH:mm:ss")</h1>
+
+                        <div class="mt-5 d-grid gap-2 col-8 mx-auto">
+                              @if (!hasCheckedIn)
+                              {
+                                    <form asp-action="CheckIn" method="post">
+                                          <input type="hidden" name="Latitude" id="checkInLat" />
+                                          <input type="hidden" name="Longitude" id="checkInLng" />
+                                          <button type="submit" class="btn btn-success btn-lg w-100 py-3 shadow">
+                                                <i class="bi bi-box-arrow-in-right fs-4"></i> Check-In (Vào ca)
+                                          </button>
+                                    </form>
+                              }
+                              else
+                              {
+                                    <div class="alert alert-success mb-4">
+                                          <i class="bi bi-check-circle-fill"></i> Bạn đã Check-in hôm nay.
+                                    </div>
+                                    <form asp-action="CheckOut" method="post">
+                                          <input type="hidden" name="Latitude" id="checkOutLat" />
+                                          <input type="hidden" name="Longitude" id="checkOutLng" />
+                                          <button type="submit" class="btn btn-warning btn-lg w-100 py-3 shadow text-dark">
+                                                <i class="bi bi-box-arrow-left fs-4"></i> Check-Out (Ra về)
+                                          </button>
+                                    </form>
+                              }
+                        </div>
+
+                        <div class="mt-4">
+                              <a asp-action="FaceCheckIn" class="btn btn-outline-primary btn-lg w-100 py-2 shadow-sm">
+                                    <i class="bi bi-camera fs-4"></i> Chấm công bằng Camera
+                              </a>
+                        </div>
+
+                        <div class="mt-4">
+                              <a asp-action="RegisterFace" class="btn btn-outline-info w-100 py-2 shadow-sm">
+                                    <i class="bi bi-person-badge"></i> Đăng ký/Cập nhật khuôn mặt
+                              </a>
+                        </div>
+
+                        <div class="mt-4">
+                              <a asp-action="History" class="btn btn-outline-secondary">
+                                    <i class="bi bi-calendar3"></i> Xem lịch sử chấm công
+                              </a>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</div>
+
+@section Scripts {
+      <script>
+                                function updateClock() {
+                                    const now = new Date();
+                                    const timeString = now.toLocaleTimeString('vi-VN', { hour12: false });
+                                    document.getElementById('liveClock').textContent = timeString;
+                                }
+                                setInterval(updateClock, 1000);
+
+                                // Get GPS
+                                if (navigator.geolocation) {
+                                    navigator.geolocation.getCurrentPosition(function (position) {
+                                        const lat = position.coords.latitude;
+                                        const lng = position.coords.longitude;
+
+                                          const inLat = document.getElementById('checkInLat');
+                                        const inLng = document.getElementById('checkInLng');
+                                        if (inLat) inLat.value = lat;
+                                        if (inLng) inLng.value = lng;
+
+                                        const outLat = document.getElementById('checkOutLat');
+                                        const outLng = document.getElementById('checkOutLng');
+                                        if (outLat) outLat.value = lat;
+                                        if (outLng) outLng.value = lng;
+                                    });
+                                }
+      </script>
+}

@@ -1,0 +1,89 @@
+@model HRM.ViewModels.Recruitment.CandidateVM
+
+@{
+    var job = ViewBag.Job as HRM.ViewModels.Recruitment.JobPostingVM;
+    ViewData["Title"] = job?.Title ?? "Chi tiết công việc";
+}
+
+<div class="container">
+    <a asp-action="Index" class="btn btn-link mb-3"><i class="bi bi-arrow-left"></i> Quay lại danh sách</a>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h1 class="text-primary mb-3">@job?.Title</h1>
+                    <div class="d-flex gap-3 text-muted mb-4">
+                        <span><i class="bi bi-building"></i> @job?.DepartmentName</span>
+                        <span><i class="bi bi-geo-alt"></i> @job?.Location</span>
+                        <span><i class="bi bi-cash"></i> @job?.MinSalary.ToString("N0") - @job?.MaxSalary.ToString("N0") VNĐ</span>
+                    </div>
+                    
+                    <hr />
+                    
+                    <h5>Mô tả công việc</h5>
+                    <div class="mb-4">
+                        @Html.Raw(job?.Description?.Replace("\n", "<br>"))
+                    </div>
+
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> Vị trí này đang tuyển <strong>@job?.Quantity</strong> người. Hạn nộp hồ sơ: <strong>@job?.Deadline.ToString("dd/MM/yyyy")</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card shadow sticky-top" style="top: 20px;">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0"><i class="bi bi-send"></i> Ứng tuyển ngay</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Apply" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="JobPostingId" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="FullName" class="form-label">Họ và tên</label>
+                            <input asp-for="FullName" class="form-control" placeholder="Nguyễn Văn A" required />
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" class="form-control" placeholder="email@example.com" required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PhoneNumber" class="form-label">Số điện thoại</label>
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="0912..." />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="CVFile" class="form-label">Upload CV (PDF)</label>
+                            <input asp-for="CVFile" class="form-control" type="file" accept=".pdf,.doc,.docx" required />
+                            <span asp-validation-for="CVFile" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Source" class="form-label">Nguồn tin</label>
+                            <select asp-for="Source" class="form-select">
+                                <option value="Website">Website công ty</option>
+                                <option value="LinkedIn">LinkedIn</option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="Referral">Giới thiệu</option>
+                                <option value="Other">Khác</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg">Gửi hồ sơ</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

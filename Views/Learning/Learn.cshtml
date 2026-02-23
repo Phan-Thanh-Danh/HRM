@@ -1,0 +1,73 @@
+@using HRM.ViewModels.Learning
+@model HRM.ViewModels.Learning.CourseVM
+
+@{
+    ViewData["Title"] = Model.Title;
+    var lessons = ViewBag.Lessons as IEnumerable<HRM.ViewModels.Learning.LessonVM>;
+    // Simplification: assume logic to select current lesson
+    var currentLesson = lessons?.OrderBy(l => l.Order).FirstOrDefault(); 
+}
+
+<div class="container-fluid h-100 d-flex flex-column">
+      <div class="row flex-grow-1">
+            <!-- Sidebar: Lesson List -->
+            <div class="col-md-3 bg-light border-end overflow-auto" style="height: calc(100vh - 100px);">
+                  <div class="p-3">
+                        <h5 class="mb-3">Nội dung khóa học</h5>
+                        <div class="list-group list-group-flush">
+                              @if (lessons != null)
+                              {
+                                    foreach (var lesson in lessons.OrderBy(l => l.Order))
+                                    {
+                                          <a href="#"
+                                                   class="list-group-item list-group-item-action @(lesson.Id == currentLesson?.Id ? "active" : "")">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                      <h6 class="mb-1">@lesson.Order. @lesson.Title</h6>
+                                                </div>
+                                                <small class="text-muted"><i class="bi bi-play-circle"></i> Video</small>
+                                          </a>
+                                    }
+                              }
+                        </div>
+                  </div>
+            </div>
+
+            <!-- Main Content: Video/Content -->
+            <div class="col-md-9 p-0 bg-black d-flex flex-column align-items-center justify-content-center"
+                       style="min-height: 500px;">
+                  @if (currentLesson != null)
+                  {
+                        <div class="text-white text-center mb-4">
+                              <h3>@currentLesson.Title</h3>
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(currentLesson.VideoUrl))
+                        {
+                              <div class="ratio ratio-16x9" style="max-width: 900px; width: 100%;">
+                                    <iframe src="@currentLesson.VideoUrl" title="YouTube video player" allowfullscreen></iframe>
+                              </div>
+                        }
+                        else
+                        {
+                              <div class="container bg-white text-dark p-5 rounded" style="max-width: 800px;">
+                                    @Html.Raw(currentLesson.Content)
+                              </div>
+                        }
+
+                        <div class="mt-4">
+                              <form asp-action="CompleteLesson" method="post">
+                                    <input type="hidden" name="courseId" value="@Model.Id" />
+                                    <input type="hidden" name="lessonId" value="@currentLesson.Id" />
+                                    <button type="submit" class="btn btn-success btn-lg">
+                                          <i class="bi bi-check-circle"></i> Hoàn thành bài học
+                                    </button>
+                              </form>
+                        </div>
+                  }
+                  else
+                  {
+                        <div class="text-white">Chưa có bài học nào.</div>
+                  }
+            </div>
+      </div>
+</div>

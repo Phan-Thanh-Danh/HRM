@@ -1,0 +1,102 @@
+@model HRM.ViewModels.HR.EmployeeVM
+
+@{
+      ViewData["Title"] = "Thêm nhân viên mới";
+      var departments = ViewBag.Departments as IEnumerable<HRM.ViewModels.HR.DepartmentVM>;
+}
+
+<div class="container">
+      <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                  <h4 class="mb-0"><i class="bi bi-person-plus"></i> @ViewData["Title"]</h4>
+            </div>
+            <div class="card-body">
+                  <form asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <h5 class="mb-3 border-bottom pb-2">Thông tin cá nhân</h5>
+                        <div class="row mb-3">
+                              <div class="col-md-4">
+                                    <label asp-for="FullName" class="form-label">Họ và tên</label>
+                                    <input asp-for="FullName" class="form-control" placeholder="Nguyễn Văn A" />
+                                    <span asp-validation-for="FullName" class="text-danger"></span>
+                              </div>
+                              <div class="col-md-4">
+                                    <label asp-for="DateOfBirth" class="form-label">Ngày sinh</label>
+                                    <input asp-for="DateOfBirth" class="form-control" type="date" />
+                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                              </div>
+                              <div class="col-md-4">
+                                    <label asp-for="Gender" class="form-label">Giới tính</label>
+                                    <select asp-for="Gender" class="form-select"
+                                            asp-items="Html.GetEnumSelectList<HRM.Models.Gender>()"></select>
+                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                              </div>
+                        </div>
+
+                        <div class="row mb-3">
+                              <div class="col-md-6">
+                                    <label asp-for="CitizenId" class="form-label">CCCD/CMND</label>
+                                    <input asp-for="CitizenId" class="form-control" />
+                                    <span asp-validation-for="CitizenId" class="text-danger"></span>
+                              </div>
+                              <div class="col-md-6">
+                                    <label asp-for="PhoneNumber" class="form-label">Số điện thoại</label>
+                                    <input asp-for="PhoneNumber" class="form-control" />
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                              </div>
+                        </div>
+
+                        <div class="row mb-3">
+                              <div class="col-md-6">
+                                    <label asp-for="Email" class="form-label">Email (Tên đăng nhập hệ thống)</label>
+                                    <input asp-for="Email" class="form-control" type="email" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                              </div>
+                              <div class="col-md-6">
+                                    <label asp-for="Address" class="form-label">Địa chỉ</label>
+                                    <input asp-for="Address" class="form-control" />
+                              </div>
+                        </div>
+
+                        <div class="mb-3">
+                              <label asp-for="AvatarFile" class="form-label">Ảnh đại diện</label>
+                              <input asp-for="AvatarFile" class="form-control" type="file" accept="image/*" />
+                        </div>
+
+                        <h5 class="mb-3 mt-4 border-bottom pb-2">Thông tin công việc</h5>
+                        <div class="row mb-3">
+                              <div class="col-md-4">
+                                    <label asp-for="DepartmentId" class="form-label">Phòng ban</label>
+                                    <select asp-for="DepartmentId" class="form-select">
+                                          <option value="">-- Chọn phòng ban --</option>
+                                          @if (departments != null)
+                                          {
+                                                foreach (var dept in departments)
+                                                {
+                                                      <option value="@dept.Id">@dept.Name</option>
+                                                }
+                                          }
+                                    </select>
+                                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                              </div>
+                              <div class="col-md-4">
+                                    <label asp-for="JobTitleId" class="form-label">Chức danh</label>
+                                    <input asp-for="JobTitleId" class="form-control" type="number"
+                                           placeholder="ID Chức danh (Tạm)" />
+                              </div>
+                              <div class="col-md-4">
+                                    <label asp-for="JoinDate" class="form-label">Ngày gia nhập</label>
+                                    <input asp-for="JoinDate" class="form-control" type="date" />
+                                    <span asp-validation-for="JoinDate" class="text-danger"></span>
+                              </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                              <a asp-action="Index" class="btn btn-secondary">Hủy bỏ</a>
+                              <button type="submit" class="btn btn-primary">Lưu nhân viên</button>
+                        </div>
+                  </form>
+            </div>
+      </div>
+</div>

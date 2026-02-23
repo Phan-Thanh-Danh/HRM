@@ -1,0 +1,107 @@
+@model IEnumerable<HRM.ViewModels.HR.OnboardingTaskVM>
+
+@{
+      ViewData["Title"] = "Quản lý Nhiệm vụ Onboarding";
+}
+
+<div class="row mb-4">
+      <div class="col-md-6">
+            <h1><i class="bi bi-list-check"></i> Nhiệm vụ Onboarding</h1>
+      </div>
+      <div class="col-md-6 text-end">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTaskModal">
+                  <i class="bi bi-plus-lg"></i> Thêm nhiệm vụ mới
+            </button>
+      </div>
+</div>
+
+<div class="card shadow-sm">
+      <div class="card-body">
+            <table class="table table-hover">
+                  <thead class="table-light">
+                        <tr>
+                              <th>Thứ tự</th>
+                              <th>Nhiệm vụ</th>
+                              <th>Mô tả</th>
+                              <th>Bắt buộc</th>
+                              <th>Trạng thái</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                        @foreach (var item in Model.OrderBy(x => x.Order))
+                        {
+                              <tr>
+                                    <td>@item.Order</td>
+                                    <td class="fw-bold">@item.Title</td>
+                                    <td>@item.Description</td>
+                                    <td>
+                                          @if (item.IsRequired)
+                                          {
+                                                <span class="badge bg-danger">Bắt buộc</span>
+                                          }
+                                          else
+                                          {
+                                                <span class="badge bg-secondary">Tùy chọn</span>
+                                          }
+                                    </td>
+                                    <td>
+                                          @if (item.IsActive)
+                                          {
+                                                <span class="text-success"><i class="bi bi-check-circle"></i> Kích hoạt</span>
+                                          }
+                                          else
+                                          {
+                                                <span class="text-muted"><i class="bi bi-x-circle"></i> Đã ẩn</span>
+                                          }
+                                    </td>
+                              </tr>
+                        }
+                  </tbody>
+            </table>
+      </div>
+</div>
+
+<!-- Create Task Modal -->
+<div class="modal fade" id="createTaskModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+            <div class="modal-content">
+                  <div class="modal-header">
+                        <h5 class="modal-title">Thêm nhiệm vụ mới</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <form asp-action="CreateTask" method="post">
+                        <div class="modal-body">
+                              <div class="mb-3">
+                                    <label for="Title" class="form-label">Tên nhiệm vụ</label>
+                                    <input type="text" class="form-control" id="Title" name="Title" required>
+                              </div>
+                              <div class="mb-3">
+                                    <label for="Description" class="form-label">Mô tả chi tiết</label>
+                                    <textarea class="form-control" id="Description" name="Description"
+                                              rows="3"></textarea>
+                              </div>
+                              <div class="row">
+                                    <div class="col-6 mb-3">
+                                          <label for="Order" class="form-label">Thứ tự hiển thị</label>
+                                          <input type="number" class="form-control" id="Order" name="Order" value="0">
+                                    </div>
+                                    <div class="col-6 mb-3 pt-4">
+                                          <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="IsRequired"
+                                                       name="IsRequired" value="true" checked>
+                                                <label class="form-check-label" for="IsRequired">
+                                                      Bắt buộc hoàn thành
+                                                </label>
+                                          </div>
+                                    </div>
+                              </div>
+                              <input type="hidden" name="IsActive" value="true" />
+                        </div>
+                        <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                              <button type="submit" class="btn btn-primary">Lưu lại</button>
+                        </div>
+                  </form>
+            </div>
+      </div>
+</div>

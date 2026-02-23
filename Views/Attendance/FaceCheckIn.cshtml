@@ -1,0 +1,169 @@
+@{
+    ViewData["Title"] = "Chấm công 3D Face Mesh";
+    var storedDescriptor = ViewBag.FaceDescriptor as string;
+    var hasCheckedIn = (bool)ViewBag.HasCheckedIn;
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h3 class="mb-3"><i class="fas fa-user-check me-2 text-primary"></i>Chấm công bảo mật 3D</h3>
+            <p id="instruction-text" class="text-secondary font-weight-bold">Đang khởi tạo hệ thống...</p>
+
+            <div class="position-relative d-inline-block mt-3 shadow-lg" style="border-radius: 20px; overflow: hidden; border: 4px solid #007bff;">
+                <video id="video" width="640" height="480" autoplay muted style="background: #000; display: block;"></video>
+                <canvas id="overlay" width="640" height="480" class="position-absolute" style="top: 0; left: 0;"></canvas>
+            </div>
+
+            <div id="status-message" class="alert alert-info mt-4 py-3 shadow-sm">
+                <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                Đang tải mô hình AI chuyên sâu...
+            </div>
+
+            <div class="mt-4">
+                <button id="btn-verify" class="btn btn-success btn-lg px-5 shadow" disabled>
+                    <i class="fas fa-check-double me-2"></i>Hoàn tất chấm công
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-lg ms-2">Hủy bỏ</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/@@mediapipe/face_mesh/face_mesh.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <script src="~/js/attendance-face.js"></script>
+    
+    <script>
+        $(document).ready(async function () {
+            const video = document.getElementById('video');
+            const overlay = document.getElementById('overlay');
+            const statusMsg = document.getElementById('status-message');
+            const instructionText = document.getElementById('instruction-text');
+            const btnVerify = document.getElementById('btn-verify');
+            
+            const storedDescriptorStr = '@Html.Raw(storedDescriptor)';
+            const storedDescriptor = new Float32Array(JSON.parse(storedDescriptorStr));
+            const faceMatcher = new faceapi.FaceMatcher([new faceapi.LabeledFaceDescriptors("User", [storedDescriptor])], 0.45);
+
+            try {
+                await faceAttendance.init('video', 'overlay');
+                faceAttendance.startVideo();
+                statusMsg.innerText = "Hệ thống bảo mật 3D đã sẵn sàng!";
+                setupMediaPipe();
+            } catch (err) {
+                statusMsg.className = "alert alert-danger mt-4 py-3";
+                statusMsg.innerText = "Lỗi khởi tạo hệ thống: " + err.message;
+            }
+
+            function setupMediaPipe() {
+                faceAttendance.faceMesh.onResults(onResults);
+                
+                let recognitionPassed = false;
+                let isCheckingMatch = false;
+
+                // Loop check match every 1s
+                setInterval(async () => {
+                    if (isCheckingMatch || video.paused || faceAttendance.isPaused) return;
+                    isCheckingMatch = true;
+                    try {
+                        const detections = await faceapi.detectSingleFace(video, faceAttendance.getDetectorOptions(160))
+                            .withFaceLandmarks()
+                            .withFaceDescriptor();
+                        if (detections) {
+                            const match = faceMatcher.findBestMatch(detections.descriptor);
+                            recognitionPassed = match.label !== 'unknown';
+                        } else {
+                            recognitionPassed = false;
+                        }
+                    } finally {
+                        isCheckingMatch = false;
+                    }
+                }, 1000);
+
+                function onResults(results) {
+                    if (faceAttendance.isPaused) return;
+
+                    if (!results.multiFaceLandmarks || results.multiFaceLandmarks.length === 0) {
+                        faceAttendance.ctx.clearRect(0, 0, overlay.width, overlay.height);
+                        faceAttendance.resetLiveness();
+                        statusMsg.innerText = "Vui lòng đưa mặt vào trước camera.";
+                        return;
+                    }
+
+                    const landmarks = results.multiFaceLandmarks[0];
+                    faceAttendance.ctx.clearRect(0, 0, overlay.width, overlay.height);
+                    
+                    // Draw connectors
+                    drawConnectors(faceAttendance.ctx, landmarks, FACEMESH_TESSELATION, {color: '#C0C0C040', lineWidth: 1});
+                    drawConnectors(faceAttendance.ctx, landmarks, FACEMESH_LIPS, {color: '#007bff'});
+
+                    if (recognitionPassed) {
+                        const liveness = faceAttendance.updateLiveness(landmarks, results.multiFaceLandmarks);
+                        
+                        if (liveness.state === 'VERIFIED') {
+                            faceAttendance.pauseProcessing(true);
+                            statusMsg.className = "alert alert-success mt-4 py-3 shadow";
+                            statusMsg.innerHTML = "<b>Xác thực thành công!</b> " + liveness.msg;
+                            instructionText.innerText = "Đang lưu chấm công...";
+                            
+                            const photoData = faceAttendance.getFrameBase64();
+                            performCheckIn(photoData);
+                        } else if (liveness.state === 'SPOOF') {
+                            statusMsg.className = "alert alert-danger mt-4 py-3 shadow";
+                            statusMsg.innerHTML = "<b>CẢNH BÁO:</b> " + liveness.msg;
+                            instructionText.innerText = "Vui lòng không sử dụng điện thoại/ảnh chụp.";
+                        } else {
+                            statusMsg.className = "alert alert-warning mt-4 py-3 shadow";
+                            statusMsg.innerText = liveness.msg;
+                            instructionText.innerHTML = "<b>Yêu cầu:</b> Hãy giữ mặt bình thường trước, sau đó mới mỉm cười.";
+                        }
+                    } else {
+                        statusMsg.className = "alert alert-info mt-4 py-3 shadow";
+                        statusMsg.innerText = "Đang xác nhận danh tính nhân viên...";
+                        faceAttendance.resetLiveness();
+                    }
+                }
+
+                async function mpLoop() {
+                    if (!video.paused && !video.ended && !faceAttendance.isPaused) {
+                        await faceAttendance.faceMesh.send({image: video});
+                    }
+                    requestAnimationFrame(mpLoop);
+                }
+                mpLoop();
+            }
+
+            async function performCheckIn(photoData) {
+                const action = '@(hasCheckedIn ? "CheckOut" : "CheckIn")';
+                const formData = new FormData();
+                formData.append("Latitude", 0);
+                formData.append("Longitude", 0);
+                formData.append("ImageData", photoData);
+                formData.append("Note", "Chấm công 3D Face Mesh (Liveness: Dynamic Transition)");
+
+                try {
+                    const response = await fetch(`/Attendance/${action}`, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        statusMsg.innerText = "Chấm công thành công! Đang chuyển hướng...";
+                        setTimeout(() => window.location.href = '/Attendance/Index', 1500);
+                    } else {
+                        statusMsg.className = "alert alert-danger mt-4 py-3";
+                        statusMsg.innerText = "Lỗi máy chủ khi lưu chấm công.";
+                        faceAttendance.pauseProcessing(false);
+                    }
+                } catch (err) {
+                    statusMsg.className = "alert alert-danger mt-4 py-3";
+                    statusMsg.innerText = "Lỗi kết nối: " + err.message;
+                    faceAttendance.pauseProcessing(false);
+                }
+            }
+        });
+    </script>
+}

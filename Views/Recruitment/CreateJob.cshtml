@@ -1,0 +1,89 @@
+@model HRM.ViewModels.Recruitment.JobPostingVM
+
+@{
+    ViewData["Title"] = "Đăng tin tuyển dụng";
+    var departments = ViewBag.Departments as IEnumerable<HRM.ViewModels.HR.DepartmentVM>;
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">@ViewData["Title"]</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateJob">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label">Tiêu đề / Chức danh</label>
+                            <input asp-for="Title" class="form-control" placeholder="Ví dụ: Senior .NET Developer" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="DepartmentId" class="form-label">Phòng ban</label>
+                                <select asp-for="DepartmentId" class="form-select" required>
+                                    <option value="">-- Chọn phòng ban --</option>
+                                    @if(departments != null)
+                                    {
+                                        foreach(var dept in departments)
+                                        {
+                                            <option value="@dept.Id">@dept.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Quantity" class="form-label">Số lượng tuyển</label>
+                                <input asp-for="Quantity" class="form-control" type="number" min="1" value="1" />
+                                <span asp-validation-for="Quantity" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="MinSalary" class="form-label">Lương tối thiểu (VNĐ)</label>
+                                <input asp-for="MinSalary" class="form-control" type="number" value="10000000" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="MaxSalary" class="form-label">Lương tối đa (VNĐ)</label>
+                                <input asp-for="MaxSalary" class="form-control" type="number" value="30000000" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Location" class="form-label">Địa điểm làm việc</label>
+                                <input asp-for="Location" class="form-control" value="Hà Nội" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Deadline" class="form-label">Hạn nộp hồ sơ</label>
+                                <input asp-for="Deadline" class="form-control" type="date" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Mô tả công việc (JD)</label>
+                            <textarea asp-for="Description" class="form-control" rows="6"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Status" class="form-label">Trạng thái tin</label>
+                            <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<HRM.Models.JobStatus>()"></select>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a asp-action="Manage" class="btn btn-secondary">Hủy bỏ</a>
+                            <button type="submit" class="btn btn-primary">Đăng tin</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

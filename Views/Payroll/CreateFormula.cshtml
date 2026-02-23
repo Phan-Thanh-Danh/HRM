@@ -1,0 +1,64 @@
+@model HRM.ViewModels.Salary.SalaryFormulaVM
+
+@{
+    ViewData["Title"] = "Thêm công thức lương";
+    var components = ViewBag.Components as IEnumerable<HRM.Models.SalaryComponent>;
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">@ViewData["Title"]</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateFormula">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="SalaryComponentId" class="form-label">Thành phần lương</label>
+                            <select asp-for="SalaryComponentId" class="form-select" required>
+                                <option value="">-- Chọn thành phần --</option>
+                                @if (components != null)
+                                {
+                                    foreach(var comp in components)
+                                    {
+                                        <option value="@comp.Id">@comp.Name (@comp.Type)</option>
+                                    }
+                                }
+                            </select>
+                            <span asp-validation-for="SalaryComponentId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="FormulaExpression" class="form-label">Biểu thức tính</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-code-slash"></i></span>
+                                <input asp-for="FormulaExpression" class="form-control" placeholder="Ví dụ: BaseSalary / 26 * RealWorkDays" />
+                            </div>
+                            <small class="text-muted">Hỗ trợ các biến: BaseSalary, RealWorkDays, OT_Hours, Allowance...</small>
+                            <span asp-validation-for="FormulaExpression" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" asp-for="IsFixed">
+                            <label class="form-check-label" asp-for="IsFixed">Là giá trị cố định (Nhập số trực tiếp vào biểu thức)</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Mô tả</label>
+                            <textarea asp-for="Description" class="form-control" rows="2"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a asp-action="Formulas" class="btn btn-secondary">Hủy bỏ</a>
+                            <button type="submit" class="btn btn-primary">Lưu công thức</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

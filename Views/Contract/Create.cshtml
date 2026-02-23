@@ -1,0 +1,93 @@
+@model HRM.ViewModels.HR.ContractVM
+
+@{
+      ViewData["Title"] = "Tạo Hợp đồng mới";
+      var employees = ViewBag.Employees as IEnumerable<HRM.ViewModels.HR.EmployeeVM>;
+}
+
+<div class="container">
+      <div class="row justify-content-center">
+            <div class="col-md-8">
+                  <div class="card shadow">
+                        <div class="card-header bg-primary text-white">
+                              <h4 class="mb-0"><i class="bi bi-file-earmark-text"></i> @ViewData["Title"]</h4>
+                        </div>
+                        <div class="card-body">
+                              <form asp-action="Create" enctype="multipart/form-data">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                    <div class="row mb-3">
+                                          <div class="col-md-6">
+                                                <label asp-for="EmployeeId" class="form-label">Nhân viên</label>
+                                                <select asp-for="EmployeeId" class="form-select" required>
+                                                      <option value="">-- Chọn nhân viên --</option>
+                                                      @if (employees != null)
+                                                      {
+                                                            foreach (var emp in employees)
+                                                            {
+                                                                  <option value="@emp.Id">@emp.FullName (@emp.Id)</option>
+                                                            }
+                                                      }
+                                                </select>
+                                                <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <label asp-for="ContractNumber" class="form-label">Số hợp đồng</label>
+                                                <input asp-for="ContractNumber" class="form-control"
+                                                       placeholder="HD-2026-XXXX" />
+                                                <span asp-validation-for="ContractNumber" class="text-danger"></span>
+                                          </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                          <div class="col-md-6">
+                                                <label asp-for="Type" class="form-label">Loại hợp đồng</label>
+                                                <select asp-for="Type" class="form-select"
+                                                        asp-items="Html.GetEnumSelectList<HRM.Models.ContractType>()"></select>
+                                                <span asp-validation-for="Type" class="text-danger"></span>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <label asp-for="BaseSalary" class="form-label">Lương cơ bản
+                                                      (VNĐ)</label>
+                                                      <input asp-for="BaseSalary" class="form-control" type="number" />
+                                                      <span asp-validation-for="BaseSalary" class="text-danger"></span>
+                                                </div>
+                                          </div>
+
+                                          <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                      <label asp-for="StartDate" class="form-label">Ngày bắt đầu</label>
+                                                      <input asp-for="StartDate" class="form-control" type="date" />
+                                                      <span asp-validation-for="StartDate" class="text-danger"></span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                      <label asp-for="EndDate" class="form-label">Ngày kết thúc</label>
+                                                      <input asp-for="EndDate" class="form-control" type="date" />
+                                                      <span asp-validation-for="EndDate" class="text-danger"></span>
+                                                </div>
+                                          </div>
+
+                                          <div class="mb-3">
+                                                <label asp-for="ContractFile" class="form-label">Tệp đính kèm
+                                                      (PDF/Scan)</label>
+                                                      <input asp-for="ContractFile" class="form-control" type="file"
+                                                             accept=".pdf,.doc,.docx,.jpg,.png" />
+                                                      <span asp-validation-for="ContractFile" class="text-danger"></span>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                      <label asp-for="Note" class="form-label">Ghi chú</label>
+                                                      <textarea asp-for="Note" class="form-control" rows="3"></textarea>
+                                                      <span asp-validation-for="Note" class="text-danger"></span>
+                                                </div>
+
+                                                <div class="d-flex justify-content-end gap-2">
+                                                      <a asp-action="Index" class="btn btn-secondary">Hủy bỏ</a>
+                                                      <button type="submit" class="btn btn-primary">Lưu hợp đồng</button>
+                                                </div>
+                                          </form>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+            </div>

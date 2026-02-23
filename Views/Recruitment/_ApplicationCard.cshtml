@@ -1,0 +1,47 @@
+@model HRM.ViewModels.Recruitment.ApplicationCardVM
+
+<div class="card mb-2 shadow-sm">
+      <div class="card-body p-2">
+            <h6 class="card-title mb-1 text-truncate" title="@Model.CandidateName">@Model.CandidateName</h6>
+            <p class="card-text small text-muted mb-1">@Model.JobTitle</p>
+            <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-secondary" style="font-size: 0.7em">@Model.AppliedDate.ToString("dd/MM")</small>
+
+                  <div class="dropdown">
+                        <button class="btn btn-xs btn-link text-decoration-none p-0" type="button"
+                                data-bs-toggle="dropdown">
+                              <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm" style="font-size: 0.9em">
+                              <li>
+                                    <h6 class="dropdown-header">Chuyển trạng thái</h6>
+                              </li>
+                              <li><button onclick="moveStatus(@Model.Id, 'Screening')" class="dropdown-item">Sàng
+                                    lọc</button></li>
+                                    <li><button onclick="moveStatus(@Model.Id, 'Interview')" class="dropdown-item">Phỏng
+                                          vấn</button></li>
+                                          <li><button onclick="moveStatus(@Model.Id, 'Offer')" class="dropdown-item">Offer</button>
+                                          </li>
+                                          <li><button onclick="moveStatus(@Model.Id, 'Hired')"
+                                                            class="dropdown-item text-success">Tuyển dụng</button></li>
+                                                <li>
+                                                      <hr class="dropdown-divider">
+                                                </li>
+                                                <li><button onclick="moveStatus(@Model.Id, 'Rejected')"
+                                                                  class="dropdown-item text-danger">Từ chối</button></li>
+                                                </ul>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+
+                        <script>
+                              function moveStatus(id, status) {
+                                    if (confirm('Chuyển trạng thái sang ' + status + '?')) {
+                                          fetch('/Recruitment/UpdateStatus?applicationId=' + id + '&status=' + status, { method: 'POST' })
+                                                .then(r => {
+                                                      if (r.ok) location.reload();
+                                                });
+                                    }
+                              }
+                        </script>

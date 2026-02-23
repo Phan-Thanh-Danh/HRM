@@ -1,0 +1,81 @@
+@model IEnumerable<HRM.ViewModels.Recruitment.JobPostingVM>
+
+@{
+      ViewData["Title"] = "Quản lý Tuyển dụng";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+      <h1><i class="bi bi-briefcase"></i> @ViewData["Title"]</h1>
+      <a asp-action="CreateJob" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Đăng tin tuyển dụng</a>
+</div>
+
+<div class="card shadow-sm">
+      <div class="card-body">
+            <table class="table table-hover align-middle">
+                  <thead class="table-light">
+                        <tr>
+                              <th>Chức danh</th>
+                              <th>Phòng ban</th>
+                              <th>Số lượng</th>
+                              <th>Hạn nộp</th>
+                              <th>Ứng viên</th>
+                              <th>Trạng thái</th>
+                              <th>Thao tác</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                        @foreach (var item in Model)
+                        {
+                              <tr>
+                                    <td class="fw-bold">@item.Title</td>
+                                    <td>@item.DepartmentName</td>
+                                    <td>@item.Quantity</td>
+                                    <td>
+                                          @if (item.Deadline < DateTime.Today)
+                                          {
+                                                <span class="text-danger">@item.Deadline.ToString("dd/MM/yyyy") (Hết hạn)</span>
+                                          }
+                                          else
+                                          {
+                                                <span>@item.Deadline.ToString("dd/MM/yyyy")</span>
+                                          }
+                                    </td>
+                                    <td>
+                                          <span class="badge bg-info rounded-pill">@item.ApplicationCount</span>
+                                    </td>
+                                    <td>
+                                          @switch (item.Status.ToString())
+                                          {
+                                                case "Draft":
+                                                      <span class="badge bg-secondary">Nháp</span>
+                                                      ; break;
+                                                case "Published":
+
+                                                      <span class="badge bg-success">Đang tuyển</span>
+                                                      ; break;
+                                                case "Closed":
+
+                                                      <span class="badge bg-dark">Đã đóng</span>
+                                                      ; break;
+                                                default:
+
+                                                      <span>@item.Status</span>
+                                                      ; break;
+                                          }
+                                    </td>
+                                    <td>
+                                          <a asp-action="Kanban" asp-route-jobId="@item.Id" class="btn btn-sm btn-primary"
+                                                   title="Xem Kanban">
+                                                <i class="bi bi-kanban"></i> Pipeline
+                                          </a>
+                                          <a asp-action="Details" asp-route-id="@item.Id"
+                                                   class="btn btn-sm btn-outline-secondary" title="Xem tin">
+                                                <i class="bi bi-eye"></i>
+                                          </a>
+                                    </td>
+                              </tr>
+                        }
+                  </tbody>
+            </table>
+      </div>
+</div>

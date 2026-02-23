@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<div class="text-center">
+    <h1 class="display-4 text-primary">Hệ Thống Quản Lý Nhân Sự 4.0</h1>
+    <p class="lead">Chào mừng bạn đến với Digital HRM - Nền tảng quản trị nhân sự toàn diện.</p>
+</div>
+
+<div class="row mt-5">
+    <!-- Card Core HR -->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-primary">
+            <div class="card-body text-center">
+                <i class="bi bi-people-fill display-4 text-primary mb-3"></i>
+                <h5 class="card-title">Quản lý Nhân sự</h5>
+                <p class="card-text">Hồ sơ nhân viên, Sơ đồ tổ chức, Hợp đồng lao động.</p>
+                <a asp-controller="Employee" asp-action="Index" class="btn btn-outline-primary">Truy cập</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Time & Attendance -->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-success">
+            <div class="card-body text-center">
+                <i class="bi bi-calendar-check display-4 text-success mb-3"></i>
+                <h5 class="card-title">Chấm công & Nghỉ phép</h5>
+                <p class="card-text">Check-in, Quản lý ca làm việc, Duyệt đơn nghỉ phép.</p>
+                <a asp-controller="Attendance" asp-action="Index" class="btn btn-outline-success">Truy cập</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Payroll -->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-warning">
+            <div class="card-body text-center">
+                <i class="bi bi-cash-stack display-4 text-warning mb-3"></i>
+                <h5 class="card-title">Tính lương (C&B)</h5>
+                <p class="card-text">Bảng lương tự động, Phiếu lương, Thuế & Bảo hiểm.</p>
+                <a asp-controller="Payroll" asp-action="Index" class="btn btn-outline-warning">Truy cập</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Recruitment -->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-info">
+            <div class="card-body text-center">
+                <i class="bi bi-person-plus display-4 text-info mb-3"></i>
+                <h5 class="card-title">Tuyển dụng</h5>
+                <p class="card-text">Quy trình tuyển dụng Kanban, Website tuyển dụng.</p>
+                <a asp-controller="Recruitment" asp-action="Index" class="btn btn-outline-info">Truy cập</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Training -->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-danger">
+            <div class="card-body text-center">
+                <i class="bi bi-mortarboard display-4 text-danger mb-3"></i>
+                <h5 class="card-title">Đào tạo (L&D)</h5>
+                <p class="card-text">Hệ thống E-Learning, Khóa học, Bài kiểm tra.</p>
+                <a asp-controller="Learning" asp-action="Index" class="btn btn-outline-danger">Truy cập</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Assets -->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-secondary">
+            <div class="card-body text-center">
+                <i class="bi bi-pc-display display-4 text-secondary mb-3"></i>
+                <h5 class="card-title">Tài sản & Tiện ích</h5>
+                <p class="card-text">Quản lý cấp phát tài sản, Đăng ký phòng họp.</p>
+                <a asp-controller="Asset" asp-action="Index" class="btn btn-outline-secondary">Truy cập</a>
+            </div>
+        </div>
+    </div>
+</div>

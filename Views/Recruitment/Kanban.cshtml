@@ -1,0 +1,113 @@
+@model HRM.ViewModels.Recruitment.KanbanBoardVM
+
+@{
+      ViewData["Title"] = "Kanban Tuyển dụng";
+}
+
+<div class="mb-4">
+      <div class="d-flex justify-content-between align-items-center">
+            <h1><i class="bi bi-kanban"></i> Pipeline Tuyển dụng</h1>
+            <div class="dropdown">
+                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        Lọc theo công việc
+                  </button>
+                  <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" asp-action="Kanban">Tất cả</a></li>
+                        @if (ViewBag.Jobs != null)
+                        {
+                              foreach (var job in ViewBag.Jobs)
+                              {
+                                    <li><a class="dropdown-item" asp-action="Kanban" asp-route-jobId="@job.Id">@job.Title</a></li>
+                              }
+                        }
+                  </ul>
+            </div>
+      </div>
+</div>
+
+<div class="row flex-nowrap overflow-auto pb-3 board-container" style="min-height: 500px;">
+      <!-- Column 1: New -->
+      <div class="col-md-3 col-xl-2">
+            <div class="card bg-light h-100">
+                  <div class="card-header fw-bold text-center border-bottom-0">Mới ứng tuyển</div>
+                  <div class="card-body p-2" id="col-new">
+                        @foreach (var app in Model.NewApplications)
+                        {
+                              <partial name="_ApplicationCard" model="app" />
+                        }
+                  </div>
+            </div>
+      </div>
+
+      <!-- Column 2: Screening -->
+      <div class="col-md-3 col-xl-2">
+            <div class="card bg-light h-100">
+                  <div class="card-header fw-bold text-center border-bottom-0 text-info">Sàng lọc</div>
+                  <div class="card-body p-2" id="col-screening">
+                        @foreach (var app in Model.ScreeningApplications)
+                        {
+                              <partial name="_ApplicationCard" model="app" />
+                        }
+                  </div>
+            </div>
+      </div>
+
+      <!-- Column 3: Interview -->
+      <div class="col-md-3 col-xl-2">
+            <div class="card bg-light h-100">
+                  <div class="card-header fw-bold text-center border-bottom-0 text-primary">Phỏng vấn</div>
+                  <div class="card-body p-2" id="col-interview">
+                        @foreach (var app in Model.InterviewApplications)
+                        {
+                              <partial name="_ApplicationCard" model="app" />
+                        }
+                  </div>
+            </div>
+      </div>
+
+      <!-- Column 4: Offer -->
+      <div class="col-md-3 col-xl-2">
+            <div class="card bg-light h-100">
+                  <div class="card-header fw-bold text-center border-bottom-0 text-warning">Đề nghị (Offer)</div>
+                  <div class="card-body p-2" id="col-offer">
+                        @foreach (var app in Model.OfferApplications)
+                        {
+                              <partial name="_ApplicationCard" model="app" />
+                        }
+                  </div>
+            </div>
+      </div>
+
+      <!-- Column 5: Hired -->
+      <div class="col-md-3 col-xl-2">
+            <div class="card bg-light h-100">
+                  <div class="card-header fw-bold text-center border-bottom-0 text-success">Đã tuyển</div>
+                  <div class="card-body p-2" id="col-hired">
+                        @foreach (var app in Model.HiredApplications)
+                        {
+                              <partial name="_ApplicationCard" model="app" />
+                        }
+                  </div>
+            </div>
+      </div>
+
+      <!-- Column 6: Rejected -->
+      <div class="col-md-3 col-xl-2">
+            <div class="card bg-light h-100">
+                  <div class="card-header fw-bold text-center border-bottom-0 text-danger">Từ chối/Loại</div>
+                  <div class="card-body p-2" id="col-rejected">
+                        @foreach (var app in Model.RejectedApplications)
+                        {
+                              <partial name="_ApplicationCard" model="app" />
+                        }
+                  </div>
+            </div>
+      </div>
+</div>
+
+@section Scripts {
+      <script>
+              // Simple drag and drop logic stub or notification that it requires JS lib like SortableJS
+              // For now, simpler implementation with buttons in card
+      </script>
+}

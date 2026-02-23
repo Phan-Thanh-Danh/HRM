@@ -1,0 +1,105 @@
+@model IEnumerable<HRM.ViewModels.Time.LeaveRequestVM>
+
+@{
+      ViewData["Title"] = "Đơn nghỉ phép của tôi";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+      <h1><i class="bi bi-calendar2-week"></i> @ViewData["Title"]</h1>
+      <a asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Tạo đơn mới</a>
+</div>
+
+<div class="card shadow-sm">
+      <div class="card-body">
+            <div class="table-responsive">
+                  <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                              <tr>
+                                    <th>Loại nghỉ</th>
+                                    <th>Từ ngày</th>
+                                    <th>Đến ngày</th>
+                                    <th>Tổng ngày</th>
+                                    <th>Lý do</th>
+                                    <th>Trạng thái</th>
+                                    <th>Người duyệt</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                              @if (Model != null && Model.Any())
+                              {
+                                    foreach (var item in Model)
+                                    {
+                                          <tr>
+                                                <td>
+                                                      @switch (item.Type.ToString())
+                                                      {
+                                                            case "AnnualLeave":
+                                                                  <span>Phép năm</span>
+                                                                  ; break;
+                                                            case "SickLeave":
+
+                                                                  <span>Nghỉ ốm</span>
+                                                                  ; break;
+                                                            case "UnpaidLeave":
+
+                                                                  <span>Không lương</span>
+                                                                  ; break;
+                                                            case "MaternityLeave":
+
+                                                                  <span>Thai sản</span>
+                                                                  ; break;
+                                                            case "Wedding":
+
+                                                                  <span>Cưới hỏi</span>
+                                                                  ; break;
+                                                            case "Funeral":
+
+                                                                  <span>Tang chế</span>
+                                                                  ; break;
+                                                            default:
+
+                                                                  <span>@item.Type</span>
+                                                                  ; break;
+                                                      }
+                                                </td>
+                                                <td>@item.FromDate.ToString("dd/MM/yyyy")</td>
+                                                <td>@item.ToDate.ToString("dd/MM/yyyy")</td>
+                                                <td>@item.TotalDays</td>
+                                                <td>@item.Reason</td>
+                                                <td>
+                                                      @switch (item.Status.ToString())
+                                                      {
+                                                            case "Pending":
+                                                                  <span class="badge bg-warning text-dark">Chờ duyệt</span>
+                                                                  ;
+                                                                  break;
+                                                            case "Approved":
+
+                                                                  <span class="badge bg-success">Đã duyệt</span>
+                                                                  ; break;
+                                                            case "Rejected":
+
+                                                                  <span class="badge bg-danger">Từ chối</span>
+                                                                  ; break;
+                                                            default:
+
+                                                                  <span>@item.Status</span>
+                                                                  ; break;
+                                                      }
+                                                </td>
+                                                <td>@(item.ApproverName ?? "--")</td>
+                                          </tr>
+                                    }
+                              }
+                              else
+                              {
+                                    <tr>
+                                          <td colspan="7" class="text-center py-4 text-muted">Bạn chưa có đơn nghỉ phép nào.
+                                          </td>
+                                    </tr>
+                              }
+                        </tbody>
+                  </table>
+            </div>
+      </div>
+</div>
