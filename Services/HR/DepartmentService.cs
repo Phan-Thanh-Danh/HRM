@@ -36,8 +36,8 @@ namespace HRM.Services.HR
 
         public async Task<List<DepartmentVM>> GetAllAsync()
         {
-            var departments = await _context.Departments
-                .Include(d => d.ParentDepartment)
+            var departments = await _context
+                .Departments.Include(d => d.ParentDepartment)
                 .Include(d => d.Manager)
                 .Where(d => !d.IsDeleted) // Filter soft deleted
                 .ToListAsync();
@@ -46,8 +46,8 @@ namespace HRM.Services.HR
 
         public async Task<DepartmentVM?> GetByIdAsync(int id)
         {
-            var department = await _context.Departments
-                .Include(d => d.ParentDepartment)
+            var department = await _context
+                .Departments.Include(d => d.ParentDepartment)
                 .Include(d => d.Manager)
                 .FirstOrDefaultAsync(d => d.Id == id);
             return _mapper.Map<DepartmentVM>(department);
