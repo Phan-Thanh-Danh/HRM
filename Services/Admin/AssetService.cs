@@ -56,7 +56,6 @@ namespace HRM.Services.Admin
         public async Task<List<AssetVM>> GetAllAssetsAsync()
         {
             var assets = await _context.Assets
-                .Include(a => a.CurrentHolderId) // Not a nav prop in Asset but used for mapping logic
                 .ToListAsync();
             // Manual check for Holder Name if needed or use separate query
             // Simplification: AutoMapper maps ID/Status

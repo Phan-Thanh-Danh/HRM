@@ -27,6 +27,13 @@ namespace HRM.Controllers
             return View(departments);
         }
 
+        public async Task<IActionResult> Details(int id)
+        {
+            var department = await _departmentService.GetByIdAsync(id);
+            if (department == null) return NotFound();
+            return View(department);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {

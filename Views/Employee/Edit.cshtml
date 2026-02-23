@@ -1,0 +1,176 @@
+@model HRM.ViewModels.HR.EmployeeVM
+
+@{
+      ViewData["Title"] = "Chỉnh sửa nhân viên";
+      var departments = ViewBag.Departments as IEnumerable<HRM.ViewModels.HR.DepartmentVM>;
+      var managers = ViewBag.Employees as IEnumerable<HRM.ViewModels.HR.EmployeeVM>;
+}
+
+<div class="container container-employee-edit mt-4">
+      <div class="row">
+            <div class="col-md-10 offset-md-1">
+                  <div class="card shadow-sm border-0">
+                        <div
+                              class="card-header bg-warning text-dark d-flex justify-content-between align-items-center py-3">
+                              <h4 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Chỉnh sửa hồ sơ: @Model.FullName
+                              </h4>
+                              <span class="badge bg-dark text-white px-3">EMP-@Model.Id.ToString("D4")</span>
+                        </div>
+                        <div class="card-body p-4">
+                              <form asp-action="Edit" enctype="multipart/form-data">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="Id" />
+                                    <input type="hidden" asp-for="AvatarUrl" />
+
+                                    <div class="row mb-4">
+                                          <div class="col-md-3 text-center border-end">
+                                                <div class="avatar-edit-container mb-3">
+                                                      @if (!string.IsNullOrEmpty(Model.AvatarUrl))
+                                                      {
+                                                            <img src="@Model.AvatarUrl" id="avatarPreview" alt="Avatar"
+                                                                 class="img-thumbnail rounded-circle"
+                                                                 style="width: 150px; height: 150px; object-fit: cover;">
+                                                      }
+                                                      else
+                                                      {
+                                                            <img src="https://via.placeholder.com/150" id="avatarPreview"
+                                                                 alt="Avatar" class="img-thumbnail rounded-circle">
+                                                      }
+                                                </div>
+                                                <div class="mb-3">
+                                                      <label asp-for="AvatarFile"
+                                                             class="btn btn-outline-secondary btn-sm">
+                                                            <i class="bi bi-camera me-1"></i> Đổi ảnh
+                                                      </label>
+                                                      <input asp-for="AvatarFile" class="d-none" type="file"
+                                                             accept="image/*" onchange="previewImage(this)" />
+                                                </div>
+                                          </div>
+                                          <div class="col-md-9">
+                                                <h5 class="text-muted border-bottom pb-2">Thông tin cá nhân</h5>
+                                                <div class="row mb-3">
+                                                      <div class="col-md-6">
+                                                            <label asp-for="FullName" class="form-label">Họ và
+                                                                  tên</label>
+                                                                  <input asp-for="FullName" class="form-control" />
+                                                                  <span asp-validation-for="FullName"
+                                                                        class="text-danger"></span>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                  <label asp-for="Email" class="form-label">Email</label>
+                                                                  <input asp-for="Email" class="form-control" type="email" />
+                                                                  <span asp-validation-for="Email" class="text-danger"></span>
+                                                            </div>
+                                                      </div>
+                                                      <div class="row mb-3">
+                                                            <div class="col-md-4">
+                                                                  <label asp-for="DateOfBirth" class="form-label">Ngày
+                                                                        sinh</label>
+                                                                        <input asp-for="DateOfBirth" class="form-control"
+                                                                               type="date" />
+                                                                        <span asp-validation-for="DateOfBirth"
+                                                                              class="text-danger"></span>
+                                                                  </div>
+                                                                  <div class="col-md-4">
+                                                                        <label asp-for="Gender" class="form-label">Giới tính</label>
+                                                                        <select asp-for="Gender" class="form-select"
+                                                                                asp-items="Html.GetEnumSelectList<HRM.Models.Gender>()"></select>
+                                                                        <span asp-validation-for="Gender"
+                                                                              class="text-danger"></span>
+                                                                  </div>
+                                                                  <div class="col-md-4">
+                                                                        <label asp-for="CitizenId" class="form-label">Số
+                                                                              CCCD</label>
+                                                                              <input asp-for="CitizenId" class="form-control" />
+                                                                              <span asp-validation-for="CitizenId"
+                                                                                    class="text-danger"></span>
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                              <label asp-for="PhoneNumber" class="form-label">Số điện
+                                                                                    thoại</label>
+                                                                                    <input asp-for="PhoneNumber" class="form-control" />
+                                                                              </div>
+                                                                              <div class="col-md-6">
+                                                                                    <label asp-for="Address" class="form-label">Địa chỉ</label>
+                                                                                    <input asp-for="Address" class="form-control" />
+                                                                              </div>
+                                                                        </div>
+                                                                  </div>
+                                                            </div>
+
+                                                            <h5 class="text-muted border-bottom pb-2 mt-4">Thông tin công việc</h5>
+                                                            <div class="row mb-3">
+                                                                  <div class="col-md-4">
+                                                                        <label asp-for="DepartmentId" class="form-label">Phòng ban</label>
+                                                                        <select asp-for="DepartmentId" class="form-select">
+                                                                              <option value="">-- Chọn phòng ban --</option>
+                                                                              @if (departments != null)
+                                                                              {
+                                                                                    foreach (var dept in departments)
+                                                                                    {
+                                                                                          <option value="@dept.Id">@dept.Name</option>
+                                                                                    }
+                                                                              }
+                                                                        </select>
+                                                                  </div>
+                                                                  <div class="col-md-4">
+                                                                        <label asp-for="JobTitleId" class="form-label">Chức danh (ID)</label>
+                                                                        <input asp-for="JobTitleId" class="form-control" type="number" />
+                                                                  </div>
+                                                                  <div class="col-md-4">
+                                                                        <label asp-for="JoinDate" class="form-label">Ngày gia nhập</label>
+                                                                        <input asp-for="JoinDate" class="form-control" type="date" />
+                                                                  </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                  <div class="col-md-6">
+                                                                        <label asp-for="ManagerId" class="form-label">Quản lý trực tiếp</label>
+                                                                        <select asp-for="ManagerId" class="form-select">
+                                                                              <option value="">-- Chọn quản lý --</option>
+                                                                              @if (managers != null)
+                                                                              {
+                                                                                    foreach (var mgr in managers.Where(e => e.Id != Model.Id))
+                                                                                    {
+                                                                                          <option value="@mgr.Id">@mgr.FullName</option>
+                                                                                    }
+                                                                              }
+                                                                        </select>
+                                                                  </div>
+                                                                  <div class="col-md-6">
+                                                                        <label asp-for="Status" class="form-label">Trạng thái</label>
+                                                                        <select asp-for="Status" class="form-select"
+                                                                                asp-items="Html.GetEnumSelectList<HRM.Models.EmployeeStatus>()"></select>
+                                                                  </div>
+                                                            </div>
+
+                                                            <div class="d-flex justify-content-end gap-2 mt-5">
+                                                                  <a asp-action="Details" asp-route-id="@Model.Id"
+                                                                           class="btn btn-outline-secondary">
+                                                                        <i class="bi bi-x-circle me-1"></i> Hủy bỏ
+                                                                  </a>
+                                                                  <button type="submit" class="btn btn-warning px-4">
+                                                                        <i class="bi bi-check-circle me-1"></i> Lưu thay đổi
+                                                                  </button>
+                                                            </div>
+                                                      </form>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+
+                        @section Scripts {
+                              <script>
+                                          function previewImage(input) {
+                                                if (input.files && input.files[0]) {
+                                                      var reader = new FileReader();
+                                                      reader.onload = function (e) {
+                                                            document.getElementById('avatarPreview').src = e.target.result;
+                                                      };
+                                                      reader.readAsDataURL(input.files[0]);
+                                                }
+                                          }
+                              </script>
+                        }

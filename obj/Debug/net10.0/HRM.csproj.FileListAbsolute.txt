@@ -231,3 +231,4 @@ D:\HACKATHON\HRM\obj\Debug\net10.0\compressed\cg7tss3757-{0}-em8fcd29lu-em8fcd29
 D:\HACKATHON\HRM\obj\Debug\net10.0\compressed\cogz0lthc8-{0}-w1hjdnoavs-w1hjdnoavs.gz
 D:\HACKATHON\HRM\obj\Debug\net10.0\compressed\dh530eph41-{0}-2xv8dvvbhc-2xv8dvvbhc.gz
 D:\HACKATHON\HRM\obj\Debug\net10.0\compressed\lvqdsakbxt-{0}-awqnxkb1we-awqnxkb1we.gz
+D:\HACKATHON\HRM\obj\Debug\net10.0\HRM.sourcelink.json

@@ -66,6 +66,64 @@ namespace HRM.Controllers
             return View(model);
         }
 
-        // Edit and Delete actions would be similar...
+        [Authorize(Roles = "SuperAdmin,HRManager")]
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var employee = await _employeeService.GetByIdAsync(id);
+            if (employee == null) return NotFound();
+
+            ViewBag.Departments = await _departmentService.GetAllAsync();
+            ViewBag.Employees = await _employeeService.GetAllAsync();
+            // In a real app, we'd also have a JobTitle service
+            
+            return View(employee);
+        }
+
+        [Authorize(Roles = "SuperAdmin,HRManager")]
+        [HttpPost]
+        public async Task<IActionResult> Edit(EmployeeVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Handle file upload if AvatarFile is present
+                if (model.AvatarFile != null)
+                {
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.AvatarFile.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/avatars", fileName);
+
+                    Directory.CreateDirectory(Path.GetDirectoryName(filePath)!);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.AvatarFile.CopyToAsync(stream);
+                    }
+                    model.AvatarUrl = "/uploads/avatars/" + fileName;
+                }
+
+                await _employeeService.UpdateAsync(model);
+                return RedirectToAction(nameof(Details), new { id = model.Id });
+            }
+            ViewBag.Departments = await _departmentService.GetAllAsync();
+            ViewBag.Employees = await _employeeService.GetAllAsync();
+            return View(model);
+        }
+
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var employee = await _employeeService.GetByIdAsync(id);
+            if (employee == null) return NotFound();
+            return View(employee);
+        }
+
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _employeeService.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

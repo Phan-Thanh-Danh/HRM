@@ -60,6 +60,14 @@ namespace HRM.Controllers
             return View(model);
         }
 
-        // Edit, Delete, Details...
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var contract = await _contractService.GetByIdAsync(id);
+            if (contract == null) return NotFound();
+            return View(contract);
+        }
+
+        // Edit, Delete...
     }
 }

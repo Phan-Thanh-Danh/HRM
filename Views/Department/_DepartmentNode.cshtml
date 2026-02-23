@@ -1,0 +1,30 @@
+@model KeyValuePair<HRM.ViewModels.HR.DepartmentVM, IEnumerable<HRM.ViewModels.HR.DepartmentVM>>
+@{
+      var dept = Model.Key;
+      var allDepts = Model.Value;
+      var children = allDepts.Where(d => d.ParentId == dept.Id);
+}
+
+<li>
+      <div class="dept-card">
+            <a asp-action="Details" asp-route-id="@dept.Id" class="dept-name text-decoration-none">@dept.Name</a>
+            <span class="dept-manager">
+                  <i class="bi bi-person-badge me-1"></i>
+                  @(string.IsNullOrEmpty(dept.ManagerName) ? "Chưa có quản lý" : dept.ManagerName)
+            </span>
+            <div class="dept-count">
+                  <i class="bi bi-people me-1"></i> @dept.EmployeeCount nhân viên
+            </div>
+      </div>
+
+      @if (children.Any())
+      {
+            <ul>
+                  @foreach (var child in children)
+                  {
+                        @await Html.PartialAsync("_DepartmentNode", new KeyValuePair<HRM.ViewModels.HR.DepartmentVM,
+                    IEnumerable<HRM.ViewModels.HR.DepartmentVM>>(child, allDepts))
+                  }
+            </ul>
+      }
+</li>
